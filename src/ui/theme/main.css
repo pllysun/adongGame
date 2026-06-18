@@ -1,0 +1,117 @@
+@import 'tailwindcss';
+
+/* 七阶颜色 Token（docs/06 §5）：全局唯一颜色出口 */
+:root {
+  --rarity-0: #9ca3af;
+  --rarity-1: #22c55e;
+  --rarity-2: #3b82f6;
+  --rarity-3: #a855f7;
+  --rarity-4: #f59e0b;
+  --rarity-5: #ef4444;
+  --rarity-6: #e879f9;
+  --ink-bg: #15130f;
+  --ink-panel: #1f1c16;
+  --ink-panel2: #282318;
+  --ink-border: #3d3526;
+  --ink-text: #d9d2c0;
+  --ink-dim: #8a8170;
+  --ink-gold: #c9a227;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden; /* 缩放铺满 + letterbox，禁止页面级滚动条 */
+  background: var(--ink-bg);
+  color: var(--ink-text);
+  font-family: 'Songti SC', 'STSong', 'Noto Serif SC', serif;
+}
+#app {
+  height: 100%;
+}
+
+.panel {
+  background: var(--ink-panel);
+  border: 1px solid var(--ink-border);
+  border-radius: 6px;
+}
+.btn {
+  @apply px-3 py-1.5 rounded border text-sm cursor-pointer select-none transition-colors;
+  background: var(--ink-panel2);
+  border-color: var(--ink-border);
+  color: var(--ink-text);
+}
+.btn:hover {
+  border-color: var(--ink-gold);
+  color: #fff;
+}
+.btn:disabled,
+.btn[data-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-primary {
+  border-color: var(--ink-gold);
+  color: var(--ink-gold);
+}
+
+/* 仙品流光 */
+.rainbow-text {
+  background: linear-gradient(90deg, #f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow-flow 3s linear infinite;
+}
+.rainbow-border {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--ink-panel), var(--ink-panel)) padding-box,
+    linear-gradient(90deg, #f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171) border-box;
+  background-size:
+    auto,
+    300% 100%;
+  animation: rainbow-border-flow 3s linear infinite;
+}
+@keyframes rainbow-flow {
+  to {
+    background-position: 300% 0;
+  }
+}
+@keyframes rainbow-border-flow {
+  to {
+    background-position:
+      0 0,
+      300% 0;
+  }
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 战报逐段淡入 */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.beat-line {
+  animation: fade-in-up 0.5s ease both;
+}
